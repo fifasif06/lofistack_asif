@@ -1,28 +1,33 @@
-// Builds one paste-ready HTML block per page into ghl-pages/.
-// Run:  node build.js
-// Each output file goes into ONE GoHighLevel "Custom Code" element on its own page.
+// Builds the whole LofiStack site into public/ — Vercel runs this on every push.
+// Run locally:  node build.js   (then open public/index.html)
 //
 // Everything comes from registry.json + components/<slug>/{component.html,prompt.md},
 // so the code and prompt shown on each page are always exactly what's in the folder.
+// Pages:  /  (the gallery)   and   /components/<slug>  (one page per component).
 
 const fs = require("fs");
 const path = require("path");
 
 const root = __dirname;
 const reg = JSON.parse(fs.readFileSync(path.join(root, "registry.json"), "utf8"));
-const out = path.join(root, "ghl-pages");
+const out = path.join(root, "public");
+fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 
-const esc = (s) =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const HOME = "/";
+const pageUrl = (c) => `/components/${c.slug}`;
+const repoFile = (c, file) => `${reg.repo}/blob/main/components/${c.slug}/${file}`;
 
-// ---------- shared page styles (all scoped to .ls-page so GHL styles can't clash) ----------
+const esc = (s) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+// ---------- shared page styles ----------
 const pageCss = `
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
-  html, body { background: #16130f !important; margin: 0; }
+  html, body { background: #16130f; margin: 0; }
   .ls-page {
     --bg: #16130f; --surface: #1f1b16; --surface-2: #282219; --border: #37302a;
     --fg: #ece4d6; --muted: #a2977f; --accent: #e0985f; --accent-soft: rgba(224,152,95,0.15);
@@ -59,7 +64,7 @@ const pageCss = `
 
   .ls-stack { display: flex; flex-direction: column; gap: 40px; }
   .ls-group { display: flex; flex-direction: column; gap: 12px; }
-  .ls-eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); }
+  .ls-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); }
   .ls-page h1 { font-family: var(--sans); font-size: 26px; line-height: 1.2; font-weight: 600; color: var(--fg); text-wrap: balance; }
   .ls-lede { color: var(--muted); font-size: 15px; max-width: 36rem; }
 
@@ -80,17 +85,20 @@ const pageCss = `
   .ls-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 
   .ls-stage { min-height: 256px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: 40px 16px; overflow: hidden; }
-  .ls-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ls-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .ls-actions { display: flex; align-items: center; gap: 12px; }
+  .ls-page .ls-repo { font-family: var(--mono); font-size: 11px; color: var(--muted); border-bottom: 1px solid var(--border); transition: color 160ms ease, border-color 160ms ease; }
+  .ls-page .ls-repo:hover, .ls-page .ls-repo:focus-visible { color: var(--accent); border-color: var(--accent); }
   .ls-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; transition: color 160ms ease, border-color 160ms ease; }
   .ls-copy:hover, .ls-copy:focus-visible { color: var(--accent); border-color: var(--accent); }
   .ls-panel { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: 20px; overflow-x: auto; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: rgba(236,228,214,0.9); tab-size: 2; }
   .ls-panel.ls-wrapped { white-space: pre-wrap; }
 </style>`;
 
-const header = (home) => `
+const header = `
   <header class="ls-top">
     <div class="ls-wrap">
-      <a class="ls-mark" href="${home}" target="_top"><b>lofi</b>stack</a>
+      <a class="ls-mark" href="${HOME}"><b>lofi</b>stack</a>
       <span class="ls-tag">90-day build challenge</span>
     </div>
   </header>`;
@@ -114,8 +122,6 @@ const copyScript = `
 <script>
   (function () {
     document.querySelectorAll(".ls-copy[data-copy]").forEach(function (btn) {
-      if (btn.getAttribute("data-ls-ready")) return;
-      btn.setAttribute("data-ls-ready", "1");
       btn.addEventListener("click", function () {
         var text = document.getElementById(btn.getAttribute("data-copy")).textContent;
         function done() { btn.textContent = "copied"; setTimeout(function () { btn.textContent = "copy"; }, 1500); }
@@ -127,10 +133,34 @@ const copyScript = `
   })();
 </script>`;
 
+// a complete HTML page around a body
+const favicon =
+  "data:image/svg+xml," +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#16130f"/><circle cx="16" cy="16" r="7" fill="#e0985f"/></svg>'
+  );
+const doc = (title, description, body, scripts = "") => `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+<meta name="theme-color" content="#16130f">
+<link rel="icon" href="${favicon}">
+${pageCss}
+</head>
+<body>
+${body}
+${scripts}
+</body>
+</html>
+`;
+
 // ---------- home page ----------
 const weeks = [...new Set(reg.components.map((c) => c.week))].sort((a, b) => a - b);
 const homeBody = `
-<div class="ls-page">${header(reg.homePath)}
+<div class="ls-page">${header}
   <main class="ls-main">
     <div class="ls-wrap ls-stack">
       <div class="ls-group">
@@ -145,7 +175,7 @@ ${weeks
 ${reg.components
   .filter((c) => c.week === w)
   .map(
-    (c) => `          <li><a class="ls-card" href="${c.path}" target="_top">
+    (c) => `          <li><a class="ls-card" href="${pageUrl(c)}">
             <span class="ls-card-top"><span class="ls-card-name">${esc(c.name)}</span><span class="ls-chip">${c.type}</span></span>
             <p>${esc(c.description)}</p>
           </a></li>`
@@ -159,7 +189,14 @@ ${reg.components
   </main>${footer}
 </div>`;
 
-fs.writeFileSync(path.join(out, "home.html"), `<!-- LofiStack · HOME page (path ${reg.homePath}) -->\n${pageCss}\n${homeBody}\n`);
+fs.writeFileSync(
+  path.join(out, "index.html"),
+  doc(
+    "LofiStack",
+    "A 90-day component gallery: 30 UI components, each with a live demo, its code, and the final prompt that produced it.",
+    homeBody
+  )
+);
 
 // ---------- one page per component ----------
 for (const c of reg.components) {
@@ -168,11 +205,11 @@ for (const c of reg.components) {
   const prompt = fs.readFileSync(path.join(dir, "prompt.md"), "utf8").trim();
 
   const body = `
-<div class="ls-page">${header(reg.homePath)}
+<div class="ls-page">${header}
   <main class="ls-main">
     <div class="ls-wrap ls-stack">
       <div class="ls-group">
-        <a class="ls-back" href="${reg.homePath}" target="_top">&larr; all components</a>
+        <a class="ls-back" href="${HOME}">&larr; all components</a>
         <div class="ls-title-row">
           <h1>${esc(c.name)}</h1>
           <span class="ls-chip">${c.type}</span>
@@ -191,7 +228,7 @@ ${code}
       <section class="ls-group">
         <div class="ls-head">
           <h2 class="ls-eyebrow">code &middot; html / css / js</h2>
-          <button class="ls-copy" type="button" data-copy="ls-code-${c.slug}">copy</button>
+          <span class="ls-actions"><a class="ls-repo" href="${repoFile(c, "component.html")}">view on github</a><button class="ls-copy" type="button" data-copy="ls-code-${c.slug}">copy</button></span>
         </div>
         <pre class="ls-panel" id="ls-code-${c.slug}">${esc(code)}</pre>
       </section>
@@ -199,7 +236,7 @@ ${code}
       <section class="ls-group">
         <div class="ls-head">
           <h2 class="ls-eyebrow">final prompt</h2>
-          <button class="ls-copy" type="button" data-copy="ls-prompt-${c.slug}">copy</button>
+          <span class="ls-actions"><a class="ls-repo" href="${repoFile(c, "prompt.md")}">view on github</a><button class="ls-copy" type="button" data-copy="ls-prompt-${c.slug}">copy</button></span>
         </div>
         <pre class="ls-panel ls-wrapped" id="ls-prompt-${c.slug}">${esc(prompt)}</pre>
       </section>
@@ -207,10 +244,9 @@ ${code}
   </main>${footer}
 </div>`;
 
-  fs.writeFileSync(
-    path.join(out, `${c.slug}.html`),
-    `<!-- LofiStack · ${c.name} page (path ${c.path}) -->\n${pageCss}\n${body}\n${copyScript}\n`
-  );
+  const pageDir = path.join(out, "components", c.slug);
+  fs.mkdirSync(pageDir, { recursive: true });
+  fs.writeFileSync(path.join(pageDir, "index.html"), doc(`${c.name} · LofiStack`, c.description, body, copyScript));
 }
 
-console.log("Built", 1 + reg.components.length, "pages into ghl-pages/");
+console.log("Built", 1 + reg.components.length, "pages into public/");
