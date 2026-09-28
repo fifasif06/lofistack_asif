@@ -4,14 +4,14 @@ A 90-day component gallery (Sep 22 – Dec 20, 2026): **30 UI components and 13 
 
 Every component has its own live page with a working demo, its full code, and the final prompt that produced it.
 
-**Live site:** https://url.lofistack.com/preview/4jvzDvx4QbbGn6NMBAus
+**Live site:** _added after the first Vercel deploy_
 
 ## Components
 
 | Week | Component | Type | Live page | Code | Prompt |
 |---|---|---|---|---|---|
-| 1 | Magnetic Hover Button | button | [open](https://url.lofistack.com/preview/xR5h6SAYfYBDvMlMMAyX) | [component.html](components/magnetic-button/component.html) | [prompt.md](components/magnetic-button/prompt.md) |
-| 1 | Skeleton Screen Loader | loader | [open](https://url.lofistack.com/preview/DCOLSlT17OhifdbPBSAm) | [component.html](components/skeleton-loader/component.html) | [prompt.md](components/skeleton-loader/prompt.md) |
+| 1 | Magnetic Hover Button | button | `/components/magnetic-button` | [component.html](components/magnetic-button/component.html) | [prompt.md](components/magnetic-button/prompt.md) |
+| 1 | Skeleton Screen Loader | loader | `/components/skeleton-loader` | [component.html](components/skeleton-loader/component.html) | [prompt.md](components/skeleton-loader/prompt.md) |
 
 ## Agent logs
 
@@ -19,30 +19,29 @@ Every component has its own live page with a working demo, its full code, and th
 |---|---|---|
 | 1 | Code generation | [week-01-code-generation.md](agent-logs/week-01-code-generation.md) |
 
-## How this repo works
+## How it works
 
-Everything is plain HTML, CSS and JavaScript — no frameworks, no build tools beyond one small Node script. The site is hosted on GoHighLevel: each page is one Custom Code element.
+Plain HTML, CSS and JavaScript — no frameworks. The code lives here on GitHub, and **Vercel** builds and hosts the site. Every change pushed to `main` goes live automatically in about a minute.
 
 ```
-registry.json            ← the list of every component: name, type, week, live link
+registry.json            ← the list of every component: name, type, week, description
 components/<name>/
   component.html         ← the component itself (style + markup + script, self-contained)
   prompt.md              ← the final prompt that produced it
-build.js                 ← turns the list + folders into paste-ready pages
-ghl-pages/               ← the output: one file per GHL page (home + one per component)
+build.js                 ← turns the list + folders into the website (in public/)
+vercel.json              ← tells Vercel to run build.js and serve public/
 agent-logs/              ← one write-up per week
-submissions/             ← the exact posts made each week
-docs/                    ← how to put pages on GoHighLevel
 ```
 
-The code and prompt shown on each live page are read straight from the component's folder at build time, so the site, the repo and the submissions always match.
+The code and prompt shown on each live page are read straight from the component's folder when the site is built, so the site and the repo always match.
 
 ### Adding a component
 
 1. Make `components/<name>/` with `component.html` and `prompt.md`.
 2. Add an entry to `registry.json`.
-3. Run `node build.js`.
-4. Paste the new file from `ghl-pages/` into a new GHL page, add its link to `registry.json`, rebuild, and re-paste `home.html`.
+3. Push to `main`. Vercel rebuilds the site; the new page appears at `/components/<name>`.
+
+To preview on your own computer first: run `node build.js` and open `public/index.html`.
 
 ## Built by
 
