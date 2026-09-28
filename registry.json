@@ -1,0 +1,30 @@
+{
+  "homePath": "https://url.lofistack.com/preview/4jvzDvx4QbbGn6NMBAus",
+  "owner": {
+    "name": "Md Asif-Ud-Doula",
+    "post": "Senior Automation Engineer L4",
+    "teams": [
+      "Service Team Lead",
+      "Operation Team",
+      "Client Acquisition Team"
+    ]
+  },
+  "components": [
+    {
+      "name": "Magnetic Hover Button",
+      "slug": "magnetic-button",
+      "path": "https://url.lofistack.com/preview/xR5h6SAYfYBDvMlMMAyX",
+      "type": "button",
+      "week": 1,
+      "description": "A button that leans toward your cursor as it approaches and springs back to rest when you leave."
+    },
+    {
+      "name": "Skeleton Screen Loader",
+      "slug": "skeleton-loader",
+      "path": "https://url.lofistack.com/preview/DCOLSlT17OhifdbPBSAm",
+      "type": "loader",
+      "week": 1,
+      "description": "A shimmering placeholder card that mirrors the real layout while content loads, then fades to it — with a 5-second lofi radio clip on play."
+    }
+  ]
+}
