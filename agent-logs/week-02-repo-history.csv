@@ -1,0 +1,56 @@
+date,time,commit,message,author,file,area,lines_added,lines_removed
+2026-09-28,14:50,297345e,Add files via upload,fifasif06,.gitignore,build & config,3,0
+2026-09-28,14:50,297345e,Add files via upload,fifasif06,README.md,README,49,0
+2026-09-28,14:50,297345e,Add files via upload,fifasif06,build.js,build & config,216,0
+2026-09-28,14:50,297345e,Add files via upload,fifasif06,registry.json,registry,30,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,agent-logs/week-01-code-generation.md,agent logs,21,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,components/magnetic-button/component.html,component: magnetic-button,82,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,components/magnetic-button/prompt.md,component: magnetic-button,15,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,components/skeleton-loader/component.html,component: skeleton-loader,327,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,components/skeleton-loader/prompt.md,component: skeleton-loader,23,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,docs/how-to-put-on-ghl.md,GoHighLevel pages (retired),42,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,ghl-pages/home.html,GoHighLevel pages (retired),113,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,ghl-pages/magnetic-button.html,GoHighLevel pages (retired),320,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,ghl-pages/skeleton-loader.html,GoHighLevel pages (retired),818,0
+2026-09-28,14:52,a79af3f,Add files via upload,fifasif06,submissions/week-01.md,submissions (removed),111,0
+2026-09-28,14:57,70d69d6,Delete submissions directory,fifasif06,submissions/week-01.md,submissions (removed),0,111
+2026-09-28,15:21,2217fb1,Update .gitignore,fifasif06,.gitignore,build & config,2,0
+2026-09-28,15:23,e0674cd,Create vercel.json,fifasif06,vercel.json,build & config,8,0
+2026-09-28,15:24,d3d3be7,Create package.json,fifasif06,package.json,build & config,9,0
+2026-09-28,15:24,05f2d49,Update registry.json,fifasif06,registry.json,registry,1,3
+2026-09-28,15:28,7bed65c,Update README.md,fifasif06,README.md,README,12,13
+2026-09-28,15:30,90b7091,Update week-01-code-generation.md,fifasif06,agent-logs/week-01-code-generation.md,agent logs,22,20
+2026-09-28,15:31,928229d,Update build.js,fifasif06,build.js,build & config,61,25
+2026-09-28,15:33,4d515c8,Delete docs directory,fifasif06,docs/how-to-put-on-ghl.md,GoHighLevel pages (retired),0,42
+2026-09-28,15:35,90ce8ed,Delete ghl-pages directory,fifasif06,ghl-pages/home.html,GoHighLevel pages (retired),0,113
+2026-09-28,15:35,90ce8ed,Delete ghl-pages directory,fifasif06,ghl-pages/magnetic-button.html,GoHighLevel pages (retired),0,320
+2026-09-28,15:35,90ce8ed,Delete ghl-pages directory,fifasif06,ghl-pages/skeleton-loader.html,GoHighLevel pages (retired),0,818
+2026-09-28,15:44,06397cf,Update README.md,fifasif06,README.md,README,3,3
+2026-09-28,16:05,e0957e2,Update README.md,fifasif06,README.md,README,3,3
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/App.jsx,site code (React),22,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/CodePanel.jsx,site code (React),23,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/ComponentPage.jsx,site code (React),57,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/Gallery.jsx,site code (React),38,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/HtmlDemo.jsx,site code (React),18,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/Layout.jsx,site code (React),30,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/NotFound.jsx,site code (React),11,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/main.jsx,site code (React),13,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/registry.js,site code (React),27,0
+2026-09-28,16:40,d3a56e2,Week 2: React site (src/),fifasif06,src/site.css,site code (React),71,0
+2026-09-28,16:40,20855d9,Week 2: 3D tilt profile card,fifasif06,components/tilt-profile-card/component.jsx,component: tilt-profile-card,149,0
+2026-09-28,16:40,20855d9,Week 2: 3D tilt profile card,fifasif06,components/tilt-profile-card/prompt.md,component: tilt-profile-card,18,0
+2026-09-28,16:41,a33fdf0,Week 2: floating-label contact form,fifasif06,components/floating-label-form/component.jsx,component: floating-label-form,203,0
+2026-09-28,16:41,a33fdf0,Week 2: floating-label contact form,fifasif06,components/floating-label-form/prompt.md,component: floating-label-form,24,0
+2026-09-28,16:41,2b9c772,Week 2: OTP input,fifasif06,components/otp-input/component.jsx,component: otp-input,164,0
+2026-09-28,16:41,2b9c772,Week 2: OTP input,fifasif06,components/otp-input/prompt.md,component: otp-input,23,0
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,.gitignore,build & config,1,0
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,README.md,README,17,11
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,build.js,build & config,28,240
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,index.html,build & config,18,0
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,package-lock.json,package-lock (auto-written),921,0
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,package.json,build & config,15,3
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,registry.json,registry,23,0
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,vercel.json,build & config,5,3
+2026-09-28,16:42,9b9e66d,"Week 2: switch site to React + Vite, add 3 components to registry, update README",fifasif06,vite.config.js,build & config,7,0
+2026-09-28,16:45,3e4e84f,OTP input: don't leave the last digit highlighted after the check,fifasif06,components/otp-input/component.jsx,component: otp-input,1,1
+2026-09-28,16:56,c604646,README: one address for every week (lofistack-asif-gallery.vercel.app),fifasif06,README.md,README,6,6
