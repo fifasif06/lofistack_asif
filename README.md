@@ -4,17 +4,17 @@ A 90-day component gallery (Sep 22 – Dec 20, 2026): **30 UI components and 13 
 
 Every component has its own live page with a working demo, its full code, and the final prompt that produced it.
 
-**Live site:** https://lofistack-asif-week2.vercel.app (the Week 1 address https://lofistack-asif-week1.vercel.app shows the same site, so old links keep working)
+**Live site:** https://lofistack-asif-gallery.vercel.app — one address for every week.
 
 ## Components
 
 | Week | Component | Type | Live page | Code | Prompt |
 |---|---|---|---|---|---|
-| 1 | Magnetic Hover Button | button | [open](https://lofistack-asif-week2.vercel.app/components/magnetic-button) | [component.html](components/magnetic-button/component.html) | [prompt.md](components/magnetic-button/prompt.md) |
-| 1 | Skeleton Screen Loader | loader | [open](https://lofistack-asif-week2.vercel.app/components/skeleton-loader) | [component.html](components/skeleton-loader/component.html) | [prompt.md](components/skeleton-loader/prompt.md) |
-| 2 | 3D Tilt Profile Card | card | [open](https://lofistack-asif-week2.vercel.app/components/tilt-profile-card) | [component.jsx](components/tilt-profile-card/component.jsx) | [prompt.md](components/tilt-profile-card/prompt.md) |
-| 2 | Floating-Label Contact Form | form | [open](https://lofistack-asif-week2.vercel.app/components/floating-label-form) | [component.jsx](components/floating-label-form/component.jsx) | [prompt.md](components/floating-label-form/prompt.md) |
-| 2 | OTP Input | input | [open](https://lofistack-asif-week2.vercel.app/components/otp-input) | [component.jsx](components/otp-input/component.jsx) | [prompt.md](components/otp-input/prompt.md) |
+| 1 | Magnetic Hover Button | button | [open](https://lofistack-asif-gallery.vercel.app/components/magnetic-button) | [component.html](components/magnetic-button/component.html) | [prompt.md](components/magnetic-button/prompt.md) |
+| 1 | Skeleton Screen Loader | loader | [open](https://lofistack-asif-gallery.vercel.app/components/skeleton-loader) | [component.html](components/skeleton-loader/component.html) | [prompt.md](components/skeleton-loader/prompt.md) |
+| 2 | 3D Tilt Profile Card | card | [open](https://lofistack-asif-gallery.vercel.app/components/tilt-profile-card) | [component.jsx](components/tilt-profile-card/component.jsx) | [prompt.md](components/tilt-profile-card/prompt.md) |
+| 2 | Floating-Label Contact Form | form | [open](https://lofistack-asif-gallery.vercel.app/components/floating-label-form) | [component.jsx](components/floating-label-form/component.jsx) | [prompt.md](components/floating-label-form/prompt.md) |
+| 2 | OTP Input | input | [open](https://lofistack-asif-gallery.vercel.app/components/otp-input) | [component.jsx](components/otp-input/component.jsx) | [prompt.md](components/otp-input/prompt.md) |
 
 ## Agent logs
 
