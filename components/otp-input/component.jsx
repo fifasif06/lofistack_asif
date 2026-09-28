@@ -79,7 +79,7 @@ export default function OtpInput({ length = LENGTH, verify = pretendVerify, sent
     setDigits(next);
     if (state === "bad") setState("idle");
     const firstEmpty = next.findIndex((d) => !d);
-    if (firstEmpty === -1) { focusBox(length - 1); submit(next); }
+    if (firstEmpty === -1) submit(next); // all six in: check it right away
     else focusBox(Math.min(i + incoming.length, length - 1));
   };
 
