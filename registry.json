@@ -23,6 +23,29 @@
       "type": "loader",
       "week": 1,
       "description": "A shimmering placeholder card that mirrors the real layout while content loads, then fades to it — with a 5-second lofi radio clip on play."
+    },
+    {
+      "name": "3D Tilt Profile Card",
+      "slug": "tilt-profile-card",
+      "type": "card",
+      "week": 2,
+      "description": "A profile card that tilts in 3D toward your cursor (or finger), with a soft glare and layers that float at different depths — then springs back flat."
+    },
+    {
+      "name": "Floating-Label Contact Form",
+      "slug": "floating-label-form",
+      "type": "form",
+      "week": 2,
+      "description": "A contact form whose labels sit inside each field and float up as you type, with friendly checks when you leave a field and a sending → sent state.",
+      "hint": "Try leaving a field empty, or typing a broken email, then click away."
+    },
+    {
+      "name": "OTP Input",
+      "slug": "otp-input",
+      "type": "input",
+      "week": 2,
+      "description": "Six boxes for a one-time code: type, paste or let your phone autofill it. Jumps box to box, checks the code the moment it's complete, and has a resend timer.",
+      "hint": "Demo code: 246810 — any other code shows the error."
     }
   ]
 }

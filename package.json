@@ -1,9 +1,21 @@
 {
   "name": "lofistack",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "LofiStack 90-Day Build Challenge — component gallery",
+  "type": "module",
+  "description": "LofiStack 90-Day Build Challenge \u2014 component gallery (React + Vite)",
   "scripts": {
-    "build": "node build.js"
+    "dev": "vite",
+    "build": "node build.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.1"
   }
 }
