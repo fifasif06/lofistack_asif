@@ -1,0 +1,82 @@
+<!-- Magnetic Hover Button — plain HTML/CSS/JS, paste-ready -->
+<style>
+  .ls-magnet-field {
+    display: inline-block;
+    padding: 60px;   /* the invisible "pull zone" around the button */
+    margin: -60px;
+  }
+  .ls-magnet-btn {
+    position: relative;
+    border: none;
+    border-radius: 999px;
+    background: #e0985f;
+    color: #16130f;
+    font-family: "Geist", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.2;
+    padding: 12px 28px;
+    cursor: pointer;
+    will-change: transform;
+  }
+  .ls-magnet-btn:focus-visible {
+    outline: 2px solid #e0985f;
+    outline-offset: 4px;
+  }
+  .ls-magnet-label {
+    display: inline-block;
+    will-change: transform;
+  }
+</style>
+
+<span class="ls-magnet-field" data-ls-magnet>
+  <button class="ls-magnet-btn" type="button">
+    <span class="ls-magnet-label">Hover me</span>
+  </button>
+</span>
+
+<script>
+  (function () {
+    var PULL = 0.35;        // how far the button follows the cursor (0–1)
+    var LABEL_EXTRA = 0.2;  // the label travels a little further than the button
+    var RADIUS = 60;        // pull starts this many px outside the button's edges
+    var FAST = "transform 120ms cubic-bezier(0.22, 1, 0.36, 1)";
+    var SPRING = "transform 480ms cubic-bezier(0.34, 1.8, 0.4, 1)"; // overshoot = bounce back
+
+    // Respect people who have "reduce motion" switched on
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    document.querySelectorAll("[data-ls-magnet]").forEach(function (field) {
+      if (field.getAttribute("data-ls-ready")) return; // don't wire the same button twice
+      field.setAttribute("data-ls-ready", "1");
+
+      var btn = field.querySelector(".ls-magnet-btn");
+      var label = field.querySelector(".ls-magnet-label");
+
+      function move(x, y, attracted) {
+        var t = attracted ? FAST : SPRING;
+        btn.style.transition = t;
+        label.style.transition = t;
+        btn.style.transform = "translate(" + x + "px," + y + "px)";
+        label.style.transform =
+          "translate(" + (x / PULL) * LABEL_EXTRA + "px," + (y / PULL) * LABEL_EXTRA + "px)";
+      }
+
+      field.addEventListener("pointermove", function (e) {
+        if (e.pointerType !== "mouse") return; // phones/tablets: behave like a normal button
+        var r = btn.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        // distance from the button's EDGE, so wide buttons feel as magnetic as square ones
+        var ex = Math.max(Math.abs(dx) - r.width / 2, 0);
+        var ey = Math.max(Math.abs(dy) - r.height / 2, 0);
+        if (Math.hypot(ex, ey) < RADIUS) move(dx * PULL, dy * PULL, true);
+        else move(0, 0, false);
+      });
+
+      field.addEventListener("pointerleave", function () {
+        move(0, 0, false);
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,818 @@
+<!-- LofiStack · Skeleton Screen Loader page (path https://url.lofistack.com/preview/DCOLSlT17OhifdbPBSAm) -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  html, body { background: #16130f !important; margin: 0; }
+  .ls-page {
+    --bg: #16130f; --surface: #1f1b16; --surface-2: #282219; --border: #37302a;
+    --fg: #ece4d6; --muted: #a2977f; --accent: #e0985f; --accent-soft: rgba(224,152,95,0.15);
+    --sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    background: var(--bg); color: var(--fg);
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    min-height: 100vh; display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased; text-align: left;
+  }
+  .ls-page *, .ls-page *::before, .ls-page *::after { box-sizing: border-box; }
+  .ls-page [hidden] { display: none !important; }
+  .ls-page ::selection { background: var(--accent); color: var(--bg); }
+  .ls-page a { color: inherit; text-decoration: none; }
+  .ls-page h1, .ls-page h2, .ls-page h3, .ls-page p, .ls-page ul, .ls-page pre { margin: 0; }
+
+  .ls-wrap { width: 100%; max-width: 896px; margin: 0 auto; padding-inline: 24px; }
+  @media (max-width: 480px) { .ls-wrap { padding-inline: 16px; } }
+
+  .ls-top { border-bottom: 1px solid var(--border); }
+  .ls-top .ls-wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-block: 20px; }
+  .ls-mark { font-family: var(--mono); font-size: 14px; letter-spacing: 0.02em; }
+  .ls-mark b { color: var(--accent); font-weight: 400; }
+  .ls-tag { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .ls-main { flex: 1; padding-block: 40px 56px; }
+  .ls-foot { border-top: 1px solid var(--border); }
+  .ls-foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding-block: 24px; }
+  .ls-who { display: flex; flex-direction: column; gap: 2px; }
+  .ls-who-name { font-size: 14px; font-weight: 500; color: var(--fg); }
+  .ls-who-post { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .ls-page .ls-teams { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .ls-teams li { font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+
+  .ls-stack { display: flex; flex-direction: column; gap: 40px; }
+  .ls-group { display: flex; flex-direction: column; gap: 12px; }
+  .ls-eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); }
+  .ls-page h1 { font-family: var(--sans); font-size: 26px; line-height: 1.2; font-weight: 600; color: var(--fg); text-wrap: balance; }
+  .ls-lede { color: var(--muted); font-size: 15px; max-width: 36rem; }
+
+  .ls-chip { background: var(--accent-soft); color: var(--accent); font-family: var(--mono); font-size: 11px; border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
+  .ls-week { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+  .ls-grid { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .ls-grid { grid-template-columns: 1fr; } }
+  .ls-card { display: flex; flex-direction: column; gap: 8px; height: 100%; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: 20px; transition: border-color 160ms ease; }
+  .ls-card:hover, .ls-card:focus-visible { border-color: var(--accent); outline: none; }
+  .ls-card:hover .ls-card-name, .ls-card:focus-visible .ls-card-name { color: var(--accent); }
+  .ls-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ls-card-name { font-weight: 500; transition: color 160ms ease; }
+  .ls-card p { color: var(--muted); font-size: 14px; }
+
+  .ls-back { font-family: var(--mono); font-size: 12px; color: var(--muted); transition: color 160ms ease; align-self: flex-start; }
+  .ls-back:hover, .ls-back:focus-visible { color: var(--accent); }
+  .ls-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+  .ls-stage { min-height: 256px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: 40px 16px; overflow: hidden; }
+  .ls-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ls-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; transition: color 160ms ease, border-color 160ms ease; }
+  .ls-copy:hover, .ls-copy:focus-visible { color: var(--accent); border-color: var(--accent); }
+  .ls-panel { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: 20px; overflow-x: auto; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: rgba(236,228,214,0.9); tab-size: 2; }
+  .ls-panel.ls-wrapped { white-space: pre-wrap; }
+</style>
+
+<div class="ls-page">
+  <header class="ls-top">
+    <div class="ls-wrap">
+      <a class="ls-mark" href="https://url.lofistack.com/preview/4jvzDvx4QbbGn6NMBAus" target="_top"><b>lofi</b>stack</a>
+      <span class="ls-tag">90-day build challenge</span>
+    </div>
+  </header>
+  <main class="ls-main">
+    <div class="ls-wrap ls-stack">
+      <div class="ls-group">
+        <a class="ls-back" href="https://url.lofistack.com/preview/4jvzDvx4QbbGn6NMBAus" target="_top">&larr; all components</a>
+        <div class="ls-title-row">
+          <h1>Skeleton Screen Loader</h1>
+          <span class="ls-chip">loader</span>
+          <span class="ls-week">week 1</span>
+        </div>
+        <p class="ls-lede">A shimmering placeholder card that mirrors the real layout while content loads, then fades to it — with a 5-second lofi radio clip on play.</p>
+      </div>
+
+      <section class="ls-group">
+        <h2 class="ls-eyebrow">demo</h2>
+        <div class="ls-stage">
+<!-- Skeleton Screen Loader — plain HTML/CSS/JS, paste-ready -->
+<style>
+  .ls-skel { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .ls-skel [hidden] { display: none !important; }
+  .ls-skel-card {
+    width: 288px;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #37302a;
+    border-radius: 12px;
+    background: #282219;
+    padding: 16px;
+    font-family: "Geist", system-ui, -apple-system, sans-serif;
+    color: #ece4d6;
+  }
+  .ls-skel-col { display: flex; flex-direction: column; gap: 12px; }
+  .ls-skel-row { display: flex; align-items: center; gap: 8px; padding-top: 4px; }
+
+  /* placeholder blocks with a soft light band sweeping across */
+  .ls-shimmer { position: relative; overflow: hidden; background: #1f1b16; border-radius: 6px; }
+  .ls-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(236, 228, 214, 0.09), transparent);
+    animation: ls-shimmer 1.4s infinite;
+  }
+  @keyframes ls-shimmer { 100% { transform: translateX(100%); } }
+  .ls-sh-img { aspect-ratio: 4 / 3; width: 100%; }
+  .ls-sh-title { height: 16px; width: 75%; }
+  .ls-sh-sub { height: 12px; width: 50%; }
+  .ls-sh-avatar { width: 32px; height: 32px; border-radius: 999px; flex: none; }
+  .ls-sh-line { height: 12px; width: 96px; }
+
+  /* the real card, faded in once "loaded" */
+  .ls-loaded { animation: ls-fadein 400ms ease-out; }
+  @keyframes ls-fadein { from { opacity: 0; transform: translateY(4px); } }
+  .ls-art {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+    background: linear-gradient(160deg, #3a2f24 0%, #241d15 55%, #191410 100%);
+  }
+  .ls-player { display: flex; align-items: center; gap: 10px; }
+  .ls-play {
+    width: 34px; height: 34px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    border: none; border-radius: 999px; padding: 0;
+    background: #e0985f; color: #16130f;
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease;
+  }
+  .ls-play:hover { transform: scale(1.06); }
+  .ls-play:focus-visible { outline: 2px solid #e0985f; outline-offset: 3px; }
+  .ls-play svg { width: 14px; height: 14px; display: block; fill: currentColor; }
+  .ls-play .ls-icon-stop { display: none; }
+  .ls-art.ls-playing .ls-play .ls-icon-play { display: none; }
+  .ls-art.ls-playing .ls-play .ls-icon-stop { display: block; }
+  .ls-art-label { font-family: "Geist Mono", ui-monospace, Menlo, monospace; font-size: 11px; color: #e0985f; }
+
+  /* 5-second progress line along the bottom of the artwork */
+  .ls-progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: rgba(224, 152, 95, 0.15); }
+  .ls-progress-fill { display: block; height: 100%; width: 0; background: #e0985f; }
+  .ls-art.ls-playing .ls-progress-fill { animation: ls-progress 5s linear forwards; }
+  @keyframes ls-progress { to { width: 100%; } }
+
+  .ls-card-title { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .ls-card-sub { margin: 0; font-size: 12px; color: #a2977f; }
+  .ls-avatar {
+    width: 32px; height: 32px; border-radius: 999px; flex: none;
+    background: rgba(224, 152, 95, 0.15); color: #e0985f;
+    font-family: "Geist Mono", ui-monospace, Menlo, monospace; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ls-station { font-size: 12px; color: #a2977f; }
+
+  .ls-replay {
+    font-family: "Geist Mono", ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: #a2977f;
+    background: none;
+    border: 1px solid #37302a;
+    border-radius: 999px;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .ls-replay:hover, .ls-replay:focus-visible { color: #e0985f; border-color: #e0985f; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ls-shimmer::after, .ls-loaded { animation: none; }
+    .ls-play { transition: none; }
+  }
+</style>
+
+<div class="ls-skel" data-ls-skeleton>
+  <div class="ls-skel-card" aria-live="polite" aria-busy="true">
+    <!-- skeleton: same shape as the real card below -->
+    <div class="ls-skel-col" data-ls-state="loading">
+      <div class="ls-shimmer ls-sh-img"></div>
+      <div class="ls-shimmer ls-sh-title"></div>
+      <div class="ls-shimmer ls-sh-sub"></div>
+      <div class="ls-skel-row">
+        <div class="ls-shimmer ls-sh-avatar"></div>
+        <div class="ls-shimmer ls-sh-line"></div>
+      </div>
+    </div>
+    <!-- real content -->
+    <div class="ls-skel-col ls-loaded" data-ls-state="loaded" hidden>
+      <div class="ls-art">
+        <div class="ls-player">
+          <button class="ls-play" type="button" aria-label="Play 5-second lofistack radio clip">
+            <svg class="ls-icon-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3.5 1.8v10.4c0 .5.5.8.9.5l8-5.2a.6.6 0 0 0 0-1L4.4 1.3c-.4-.3-.9 0-.9.5z"/></svg>
+            <svg class="ls-icon-stop" viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="2" width="3.2" height="10" rx="1"/><rect x="8.3" y="2" width="3.2" height="10" rx="1"/></svg>
+          </button>
+          <span class="ls-art-label">side b &middot; 5 sec preview</span>
+        </div>
+        <span class="ls-progress" aria-hidden="true"><span class="ls-progress-fill"></span></span>
+      </div>
+      <h3 class="ls-card-title">rainy window study mix</h3>
+      <p class="ls-card-sub">1 hr 12 min &middot; tape hiss included</p>
+      <div class="ls-skel-row">
+        <div class="ls-avatar">lo</div>
+        <span class="ls-station">lofistack radio</span>
+      </div>
+    </div>
+  </div>
+  <button class="ls-replay" type="button">replay loading</button>
+</div>
+
+<script>
+  (function () {
+    var LOAD_MS = 2200; // pretend the content takes 2.2 seconds to arrive
+    var CLIP_S = 5;     // length of the radio clip in seconds
+
+    /* ---------- the 5-second lofi clip, made live in the browser (no audio file) ----------
+       Jazzy chords (Dm9 - G13 - Cmaj9 - Am7) on a soft electric-piano tone with a gentle
+       tape wobble, a round bass, a lazy swung drum beat at 72 BPM, vinyl crackle and tape hiss. */
+    function buildClip(ctx, out, t0) {
+      var END = t0 + CLIP_S;
+      var BEAT = 60 / 72;
+      var hz = function (m) { return 440 * Math.pow(2, (m - 69) / 12); };
+
+      // master volume: quick fade in, gentle fade out, through a warm low-pass and a limiter
+      var master = ctx.createGain();
+      master.gain.setValueAtTime(0, t0);
+      master.gain.linearRampToValueAtTime(0.85, t0 + 0.12);
+      master.gain.setValueAtTime(0.85, END - 0.9);
+      master.gain.linearRampToValueAtTime(0, END);
+      var warm = ctx.createBiquadFilter();
+      warm.type = "lowpass"; warm.frequency.value = 2600; warm.Q.value = 0.4;
+      var limit = ctx.createDynamicsCompressor();
+      limit.threshold.value = -10; limit.ratio.value = 6; limit.attack.value = 0.003; limit.release.value = 0.2;
+      master.connect(warm); warm.connect(limit); limit.connect(out);
+
+      // white noise, reused by drums and hiss
+      var noise = ctx.createBuffer(1, Math.floor(ctx.sampleRate * (CLIP_S + 0.5)), ctx.sampleRate);
+      var nd = noise.getChannelData(0);
+      for (var i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+
+      // tape wobble: a slow wave that bends the chord pitch a few cents
+      var wow = ctx.createOscillator(); wow.frequency.value = 0.55;
+      var wowDepth = ctx.createGain(); wowDepth.gain.value = 9;
+      wow.connect(wowDepth); wow.start(t0); wow.stop(END + 0.1);
+
+      // ---- chords ----
+      var chords = [
+        { at: 0,    bass: 38, notes: [53, 57, 60, 64] },     // Dm9   (bass D)
+        { at: 1.25, bass: 43, notes: [53, 59, 64, 69] },     // G13   (bass G)
+        { at: 2.5,  bass: 36, notes: [52, 55, 59, 62] },     // Cmaj9 (bass C)
+        { at: 3.75, bass: 45, notes: [55, 60, 64, 67] }      // Am7   (bass A)
+      ];
+      chords.forEach(function (c) {
+        var start = t0 + c.at, stop = Math.min(start + 1.45, END);
+        c.notes.forEach(function (m, k) {
+          var s = start + k * 0.018;                 // tiny strum
+          var g = ctx.createGain();
+          g.gain.setValueAtTime(0, s);
+          g.gain.linearRampToValueAtTime(0.075, s + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.03, s + 0.7);
+          g.gain.exponentialRampToValueAtTime(0.0008, stop);
+          [["sine", 1, 1], ["triangle", 1, 0.35], ["sine", 2, 0.12]].forEach(function (p) {
+            var o = ctx.createOscillator(), og = ctx.createGain();
+            o.type = p[0]; o.frequency.value = hz(m) * p[1]; og.gain.value = p[2];
+            wowDepth.connect(o.detune);
+            o.connect(og); og.connect(g);
+            o.start(s); o.stop(stop + 0.05);
+          });
+          g.connect(master);
+        });
+        // bass
+        var b = ctx.createOscillator(), bg = ctx.createGain();
+        b.type = "sine"; b.frequency.value = hz(c.bass);
+        bg.gain.setValueAtTime(0, start);
+        bg.gain.linearRampToValueAtTime(0.28, start + 0.03);
+        bg.gain.exponentialRampToValueAtTime(0.08, start + 0.9);
+        bg.gain.exponentialRampToValueAtTime(0.0008, stop);
+        b.connect(bg); bg.connect(master); b.start(start); b.stop(stop + 0.05);
+      });
+
+      // ---- drums (positions in beats; off-beat eighths are swung) ----
+      function kick(t) {
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.frequency.setValueAtTime(115, t);
+        o.frequency.exponentialRampToValueAtTime(42, t + 0.14);
+        g.gain.setValueAtTime(0.75, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+        o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.4);
+      }
+      function snare(t) {
+        var n = ctx.createBufferSource(); n.buffer = noise;
+        var bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1700; bp.Q.value = 0.8;
+        var g = ctx.createGain();
+        g.gain.setValueAtTime(0.32, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+        n.connect(bp); bp.connect(g); g.connect(master);
+        n.start(t, Math.random() * 2, 0.22);
+        var body = ctx.createOscillator(), bg = ctx.createGain();
+        body.frequency.value = 185;
+        bg.gain.setValueAtTime(0.12, t);
+        bg.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+        body.connect(bg); bg.connect(master); body.start(t); body.stop(t + 0.1);
+      }
+      function hat(t, vol) {
+        var n = ctx.createBufferSource(); n.buffer = noise;
+        var hp = ctx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 7000;
+        var g = ctx.createGain();
+        g.gain.setValueAtTime(vol, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+        n.connect(hp); hp.connect(g); g.connect(master);
+        n.start(t, Math.random() * 2, 0.06);
+      }
+      [0, 1.75, 2.5, 4].forEach(function (b) { kick(t0 + b * BEAT); });
+      [1, 3, 5].forEach(function (b) { snare(t0 + b * BEAT); });
+      for (var e = 0; e < 12; e++) {
+        var beat = Math.floor(e / 2) + (e % 2 ? 0.6 : 0);  // swing: off-beat lands late
+        var t = t0 + beat * BEAT;
+        if (t < END - 0.05) hat(t, e % 2 ? 0.035 : 0.06);
+      }
+
+      // ---- tape hiss (steady, quiet) ----
+      var hiss = ctx.createBufferSource(); hiss.buffer = noise;
+      var hf = ctx.createBiquadFilter(); hf.type = "bandpass"; hf.frequency.value = 5000; hf.Q.value = 0.3;
+      var hg = ctx.createGain(); hg.gain.value = 0.02;
+      hiss.connect(hf); hf.connect(hg); hg.connect(limit);  // skips the warm filter so it stays airy
+      hiss.start(t0); hiss.stop(END);
+
+      // ---- vinyl crackle (random soft pops) ----
+      var crack = ctx.createBuffer(1, Math.floor(ctx.sampleRate * CLIP_S), ctx.sampleRate);
+      var cd = crack.getChannelData(0);
+      for (var j = 0; j < cd.length; j++) if (Math.random() < 0.00035) cd[j] = (Math.random() * 2 - 1) * 0.7;
+      var cs = ctx.createBufferSource(); cs.buffer = crack;
+      var cf = ctx.createBiquadFilter(); cf.type = "highpass"; cf.frequency.value = 1200;
+      var cgn = ctx.createGain(); cgn.gain.setValueAtTime(0, t0);
+      cgn.gain.linearRampToValueAtTime(0.35, t0 + 0.1);
+      cgn.gain.setValueAtTime(0.35, END - 0.6);
+      cgn.gain.linearRampToValueAtTime(0, END);
+      cs.connect(cf); cf.connect(cgn); cgn.connect(limit);
+      cs.start(t0);
+    }
+    window.lsBuildLofiClip = buildClip; // exposed so the clip can be tested offline
+
+    document.querySelectorAll("[data-ls-skeleton]").forEach(function (root) {
+      if (root.getAttribute("data-ls-ready")) return; // don't wire twice
+      root.setAttribute("data-ls-ready", "1");
+
+      var card = root.querySelector(".ls-skel-card");
+      var loading = root.querySelector('[data-ls-state="loading"]');
+      var loaded = root.querySelector('[data-ls-state="loaded"]');
+      var art = root.querySelector(".ls-art");
+      var playBtn = root.querySelector(".ls-play");
+      var timer = null;
+      var audio = null; // { ctx, end } while playing
+
+      function stopClip() {
+        if (!audio) return;
+        var a = audio; audio = null;
+        clearTimeout(a.end);
+        try { a.ctx.close(); } catch (e) {}
+        art.classList.remove("ls-playing");
+        playBtn.setAttribute("aria-label", "Play 5-second lofistack radio clip");
+      }
+
+      function playClip() {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return; // very old browser: button just does nothing
+        var ctx = new AC();
+        buildClip(ctx, ctx.destination, ctx.currentTime + 0.05);
+        audio = { ctx: ctx, end: setTimeout(stopClip, CLIP_S * 1000 + 150) };
+        art.classList.remove("ls-playing"); void art.offsetWidth; // restart progress line
+        art.classList.add("ls-playing");
+        playBtn.setAttribute("aria-label", "Stop clip");
+      }
+
+      playBtn.addEventListener("click", function () {
+        if (audio) stopClip(); else playClip();
+      });
+
+      function start() {
+        stopClip();
+        clearTimeout(timer);
+        card.setAttribute("aria-busy", "true");
+        loaded.hidden = true;
+        loading.hidden = false;
+        timer = setTimeout(function () {
+          loading.hidden = true;
+          // re-trigger the fade-in each time
+          loaded.classList.remove("ls-loaded");
+          void loaded.offsetWidth;
+          loaded.classList.add("ls-loaded");
+          loaded.hidden = false;
+          card.setAttribute("aria-busy", "false");
+        }, LOAD_MS);
+      }
+
+      root.querySelector(".ls-replay").addEventListener("click", start);
+      start();
+    });
+  })();
+</script>
+        </div>
+      </section>
+
+      <section class="ls-group">
+        <div class="ls-head">
+          <h2 class="ls-eyebrow">code &middot; html / css / js</h2>
+          <button class="ls-copy" type="button" data-copy="ls-code-skeleton-loader">copy</button>
+        </div>
+        <pre class="ls-panel" id="ls-code-skeleton-loader">&lt;!-- Skeleton Screen Loader — plain HTML/CSS/JS, paste-ready --&gt;
+&lt;style&gt;
+  .ls-skel { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .ls-skel [hidden] { display: none !important; }
+  .ls-skel-card {
+    width: 288px;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #37302a;
+    border-radius: 12px;
+    background: #282219;
+    padding: 16px;
+    font-family: "Geist", system-ui, -apple-system, sans-serif;
+    color: #ece4d6;
+  }
+  .ls-skel-col { display: flex; flex-direction: column; gap: 12px; }
+  .ls-skel-row { display: flex; align-items: center; gap: 8px; padding-top: 4px; }
+
+  /* placeholder blocks with a soft light band sweeping across */
+  .ls-shimmer { position: relative; overflow: hidden; background: #1f1b16; border-radius: 6px; }
+  .ls-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(236, 228, 214, 0.09), transparent);
+    animation: ls-shimmer 1.4s infinite;
+  }
+  @keyframes ls-shimmer { 100% { transform: translateX(100%); } }
+  .ls-sh-img { aspect-ratio: 4 / 3; width: 100%; }
+  .ls-sh-title { height: 16px; width: 75%; }
+  .ls-sh-sub { height: 12px; width: 50%; }
+  .ls-sh-avatar { width: 32px; height: 32px; border-radius: 999px; flex: none; }
+  .ls-sh-line { height: 12px; width: 96px; }
+
+  /* the real card, faded in once "loaded" */
+  .ls-loaded { animation: ls-fadein 400ms ease-out; }
+  @keyframes ls-fadein { from { opacity: 0; transform: translateY(4px); } }
+  .ls-art {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+    background: linear-gradient(160deg, #3a2f24 0%, #241d15 55%, #191410 100%);
+  }
+  .ls-player { display: flex; align-items: center; gap: 10px; }
+  .ls-play {
+    width: 34px; height: 34px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    border: none; border-radius: 999px; padding: 0;
+    background: #e0985f; color: #16130f;
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease;
+  }
+  .ls-play:hover { transform: scale(1.06); }
+  .ls-play:focus-visible { outline: 2px solid #e0985f; outline-offset: 3px; }
+  .ls-play svg { width: 14px; height: 14px; display: block; fill: currentColor; }
+  .ls-play .ls-icon-stop { display: none; }
+  .ls-art.ls-playing .ls-play .ls-icon-play { display: none; }
+  .ls-art.ls-playing .ls-play .ls-icon-stop { display: block; }
+  .ls-art-label { font-family: "Geist Mono", ui-monospace, Menlo, monospace; font-size: 11px; color: #e0985f; }
+
+  /* 5-second progress line along the bottom of the artwork */
+  .ls-progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: rgba(224, 152, 95, 0.15); }
+  .ls-progress-fill { display: block; height: 100%; width: 0; background: #e0985f; }
+  .ls-art.ls-playing .ls-progress-fill { animation: ls-progress 5s linear forwards; }
+  @keyframes ls-progress { to { width: 100%; } }
+
+  .ls-card-title { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .ls-card-sub { margin: 0; font-size: 12px; color: #a2977f; }
+  .ls-avatar {
+    width: 32px; height: 32px; border-radius: 999px; flex: none;
+    background: rgba(224, 152, 95, 0.15); color: #e0985f;
+    font-family: "Geist Mono", ui-monospace, Menlo, monospace; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ls-station { font-size: 12px; color: #a2977f; }
+
+  .ls-replay {
+    font-family: "Geist Mono", ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: #a2977f;
+    background: none;
+    border: 1px solid #37302a;
+    border-radius: 999px;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .ls-replay:hover, .ls-replay:focus-visible { color: #e0985f; border-color: #e0985f; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ls-shimmer::after, .ls-loaded { animation: none; }
+    .ls-play { transition: none; }
+  }
+&lt;/style&gt;
+
+&lt;div class="ls-skel" data-ls-skeleton&gt;
+  &lt;div class="ls-skel-card" aria-live="polite" aria-busy="true"&gt;
+    &lt;!-- skeleton: same shape as the real card below --&gt;
+    &lt;div class="ls-skel-col" data-ls-state="loading"&gt;
+      &lt;div class="ls-shimmer ls-sh-img"&gt;&lt;/div&gt;
+      &lt;div class="ls-shimmer ls-sh-title"&gt;&lt;/div&gt;
+      &lt;div class="ls-shimmer ls-sh-sub"&gt;&lt;/div&gt;
+      &lt;div class="ls-skel-row"&gt;
+        &lt;div class="ls-shimmer ls-sh-avatar"&gt;&lt;/div&gt;
+        &lt;div class="ls-shimmer ls-sh-line"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- real content --&gt;
+    &lt;div class="ls-skel-col ls-loaded" data-ls-state="loaded" hidden&gt;
+      &lt;div class="ls-art"&gt;
+        &lt;div class="ls-player"&gt;
+          &lt;button class="ls-play" type="button" aria-label="Play 5-second lofistack radio clip"&gt;
+            &lt;svg class="ls-icon-play" viewBox="0 0 14 14" aria-hidden="true"&gt;&lt;path d="M3.5 1.8v10.4c0 .5.5.8.9.5l8-5.2a.6.6 0 0 0 0-1L4.4 1.3c-.4-.3-.9 0-.9.5z"/&gt;&lt;/svg&gt;
+            &lt;svg class="ls-icon-stop" viewBox="0 0 14 14" aria-hidden="true"&gt;&lt;rect x="2.5" y="2" width="3.2" height="10" rx="1"/&gt;&lt;rect x="8.3" y="2" width="3.2" height="10" rx="1"/&gt;&lt;/svg&gt;
+          &lt;/button&gt;
+          &lt;span class="ls-art-label"&gt;side b &amp;middot; 5 sec preview&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;span class="ls-progress" aria-hidden="true"&gt;&lt;span class="ls-progress-fill"&gt;&lt;/span&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;h3 class="ls-card-title"&gt;rainy window study mix&lt;/h3&gt;
+      &lt;p class="ls-card-sub"&gt;1 hr 12 min &amp;middot; tape hiss included&lt;/p&gt;
+      &lt;div class="ls-skel-row"&gt;
+        &lt;div class="ls-avatar"&gt;lo&lt;/div&gt;
+        &lt;span class="ls-station"&gt;lofistack radio&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="ls-replay" type="button"&gt;replay loading&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  (function () {
+    var LOAD_MS = 2200; // pretend the content takes 2.2 seconds to arrive
+    var CLIP_S = 5;     // length of the radio clip in seconds
+
+    /* ---------- the 5-second lofi clip, made live in the browser (no audio file) ----------
+       Jazzy chords (Dm9 - G13 - Cmaj9 - Am7) on a soft electric-piano tone with a gentle
+       tape wobble, a round bass, a lazy swung drum beat at 72 BPM, vinyl crackle and tape hiss. */
+    function buildClip(ctx, out, t0) {
+      var END = t0 + CLIP_S;
+      var BEAT = 60 / 72;
+      var hz = function (m) { return 440 * Math.pow(2, (m - 69) / 12); };
+
+      // master volume: quick fade in, gentle fade out, through a warm low-pass and a limiter
+      var master = ctx.createGain();
+      master.gain.setValueAtTime(0, t0);
+      master.gain.linearRampToValueAtTime(0.85, t0 + 0.12);
+      master.gain.setValueAtTime(0.85, END - 0.9);
+      master.gain.linearRampToValueAtTime(0, END);
+      var warm = ctx.createBiquadFilter();
+      warm.type = "lowpass"; warm.frequency.value = 2600; warm.Q.value = 0.4;
+      var limit = ctx.createDynamicsCompressor();
+      limit.threshold.value = -10; limit.ratio.value = 6; limit.attack.value = 0.003; limit.release.value = 0.2;
+      master.connect(warm); warm.connect(limit); limit.connect(out);
+
+      // white noise, reused by drums and hiss
+      var noise = ctx.createBuffer(1, Math.floor(ctx.sampleRate * (CLIP_S + 0.5)), ctx.sampleRate);
+      var nd = noise.getChannelData(0);
+      for (var i = 0; i &lt; nd.length; i++) nd[i] = Math.random() * 2 - 1;
+
+      // tape wobble: a slow wave that bends the chord pitch a few cents
+      var wow = ctx.createOscillator(); wow.frequency.value = 0.55;
+      var wowDepth = ctx.createGain(); wowDepth.gain.value = 9;
+      wow.connect(wowDepth); wow.start(t0); wow.stop(END + 0.1);
+
+      // ---- chords ----
+      var chords = [
+        { at: 0,    bass: 38, notes: [53, 57, 60, 64] },     // Dm9   (bass D)
+        { at: 1.25, bass: 43, notes: [53, 59, 64, 69] },     // G13   (bass G)
+        { at: 2.5,  bass: 36, notes: [52, 55, 59, 62] },     // Cmaj9 (bass C)
+        { at: 3.75, bass: 45, notes: [55, 60, 64, 67] }      // Am7   (bass A)
+      ];
+      chords.forEach(function (c) {
+        var start = t0 + c.at, stop = Math.min(start + 1.45, END);
+        c.notes.forEach(function (m, k) {
+          var s = start + k * 0.018;                 // tiny strum
+          var g = ctx.createGain();
+          g.gain.setValueAtTime(0, s);
+          g.gain.linearRampToValueAtTime(0.075, s + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.03, s + 0.7);
+          g.gain.exponentialRampToValueAtTime(0.0008, stop);
+          [["sine", 1, 1], ["triangle", 1, 0.35], ["sine", 2, 0.12]].forEach(function (p) {
+            var o = ctx.createOscillator(), og = ctx.createGain();
+            o.type = p[0]; o.frequency.value = hz(m) * p[1]; og.gain.value = p[2];
+            wowDepth.connect(o.detune);
+            o.connect(og); og.connect(g);
+            o.start(s); o.stop(stop + 0.05);
+          });
+          g.connect(master);
+        });
+        // bass
+        var b = ctx.createOscillator(), bg = ctx.createGain();
+        b.type = "sine"; b.frequency.value = hz(c.bass);
+        bg.gain.setValueAtTime(0, start);
+        bg.gain.linearRampToValueAtTime(0.28, start + 0.03);
+        bg.gain.exponentialRampToValueAtTime(0.08, start + 0.9);
+        bg.gain.exponentialRampToValueAtTime(0.0008, stop);
+        b.connect(bg); bg.connect(master); b.start(start); b.stop(stop + 0.05);
+      });
+
+      // ---- drums (positions in beats; off-beat eighths are swung) ----
+      function kick(t) {
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.frequency.setValueAtTime(115, t);
+        o.frequency.exponentialRampToValueAtTime(42, t + 0.14);
+        g.gain.setValueAtTime(0.75, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+        o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.4);
+      }
+      function snare(t) {
+        var n = ctx.createBufferSource(); n.buffer = noise;
+        var bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1700; bp.Q.value = 0.8;
+        var g = ctx.createGain();
+        g.gain.setValueAtTime(0.32, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+        n.connect(bp); bp.connect(g); g.connect(master);
+        n.start(t, Math.random() * 2, 0.22);
+        var body = ctx.createOscillator(), bg = ctx.createGain();
+        body.frequency.value = 185;
+        bg.gain.setValueAtTime(0.12, t);
+        bg.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+        body.connect(bg); bg.connect(master); body.start(t); body.stop(t + 0.1);
+      }
+      function hat(t, vol) {
+        var n = ctx.createBufferSource(); n.buffer = noise;
+        var hp = ctx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 7000;
+        var g = ctx.createGain();
+        g.gain.setValueAtTime(vol, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+        n.connect(hp); hp.connect(g); g.connect(master);
+        n.start(t, Math.random() * 2, 0.06);
+      }
+      [0, 1.75, 2.5, 4].forEach(function (b) { kick(t0 + b * BEAT); });
+      [1, 3, 5].forEach(function (b) { snare(t0 + b * BEAT); });
+      for (var e = 0; e &lt; 12; e++) {
+        var beat = Math.floor(e / 2) + (e % 2 ? 0.6 : 0);  // swing: off-beat lands late
+        var t = t0 + beat * BEAT;
+        if (t &lt; END - 0.05) hat(t, e % 2 ? 0.035 : 0.06);
+      }
+
+      // ---- tape hiss (steady, quiet) ----
+      var hiss = ctx.createBufferSource(); hiss.buffer = noise;
+      var hf = ctx.createBiquadFilter(); hf.type = "bandpass"; hf.frequency.value = 5000; hf.Q.value = 0.3;
+      var hg = ctx.createGain(); hg.gain.value = 0.02;
+      hiss.connect(hf); hf.connect(hg); hg.connect(limit);  // skips the warm filter so it stays airy
+      hiss.start(t0); hiss.stop(END);
+
+      // ---- vinyl crackle (random soft pops) ----
+      var crack = ctx.createBuffer(1, Math.floor(ctx.sampleRate * CLIP_S), ctx.sampleRate);
+      var cd = crack.getChannelData(0);
+      for (var j = 0; j &lt; cd.length; j++) if (Math.random() &lt; 0.00035) cd[j] = (Math.random() * 2 - 1) * 0.7;
+      var cs = ctx.createBufferSource(); cs.buffer = crack;
+      var cf = ctx.createBiquadFilter(); cf.type = "highpass"; cf.frequency.value = 1200;
+      var cgn = ctx.createGain(); cgn.gain.setValueAtTime(0, t0);
+      cgn.gain.linearRampToValueAtTime(0.35, t0 + 0.1);
+      cgn.gain.setValueAtTime(0.35, END - 0.6);
+      cgn.gain.linearRampToValueAtTime(0, END);
+      cs.connect(cf); cf.connect(cgn); cgn.connect(limit);
+      cs.start(t0);
+    }
+    window.lsBuildLofiClip = buildClip; // exposed so the clip can be tested offline
+
+    document.querySelectorAll("[data-ls-skeleton]").forEach(function (root) {
+      if (root.getAttribute("data-ls-ready")) return; // don't wire twice
+      root.setAttribute("data-ls-ready", "1");
+
+      var card = root.querySelector(".ls-skel-card");
+      var loading = root.querySelector('[data-ls-state="loading"]');
+      var loaded = root.querySelector('[data-ls-state="loaded"]');
+      var art = root.querySelector(".ls-art");
+      var playBtn = root.querySelector(".ls-play");
+      var timer = null;
+      var audio = null; // { ctx, end } while playing
+
+      function stopClip() {
+        if (!audio) return;
+        var a = audio; audio = null;
+        clearTimeout(a.end);
+        try { a.ctx.close(); } catch (e) {}
+        art.classList.remove("ls-playing");
+        playBtn.setAttribute("aria-label", "Play 5-second lofistack radio clip");
+      }
+
+      function playClip() {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return; // very old browser: button just does nothing
+        var ctx = new AC();
+        buildClip(ctx, ctx.destination, ctx.currentTime + 0.05);
+        audio = { ctx: ctx, end: setTimeout(stopClip, CLIP_S * 1000 + 150) };
+        art.classList.remove("ls-playing"); void art.offsetWidth; // restart progress line
+        art.classList.add("ls-playing");
+        playBtn.setAttribute("aria-label", "Stop clip");
+      }
+
+      playBtn.addEventListener("click", function () {
+        if (audio) stopClip(); else playClip();
+      });
+
+      function start() {
+        stopClip();
+        clearTimeout(timer);
+        card.setAttribute("aria-busy", "true");
+        loaded.hidden = true;
+        loading.hidden = false;
+        timer = setTimeout(function () {
+          loading.hidden = true;
+          // re-trigger the fade-in each time
+          loaded.classList.remove("ls-loaded");
+          void loaded.offsetWidth;
+          loaded.classList.add("ls-loaded");
+          loaded.hidden = false;
+          card.setAttribute("aria-busy", "false");
+        }, LOAD_MS);
+      }
+
+      root.querySelector(".ls-replay").addEventListener("click", start);
+      start();
+    });
+  })();
+&lt;/script&gt;</pre>
+      </section>
+
+      <section class="ls-group">
+        <div class="ls-head">
+          <h2 class="ls-eyebrow">final prompt</h2>
+          <button class="ls-copy" type="button" data-copy="ls-prompt-skeleton-loader">copy</button>
+        </div>
+        <pre class="ls-panel ls-wrapped" id="ls-prompt-skeleton-loader"># Final prompt — Skeleton Screen Loader
+
+Build a skeleton screen loader as one self-contained block of plain HTML, CSS and JavaScript (no frameworks, no libraries, no audio files) that I can paste into a GoHighLevel custom code element.
+
+Loading behavior:
+- Show a placeholder card with the exact same shape as the real card: an image block (4:3), a title line, a shorter subtitle line, and a row with a small circle and a short line.
+- Every placeholder block has a soft shimmer — a faint light band sweeping left to right on a ~1.4s loop, done in CSS only.
+- Pretend to load for about 2.2 seconds, then swap to the real card with a short fade-and-rise (~400ms).
+- Add a small "replay loading" button under the card that restarts the whole thing (and stops any music playing).
+- Put both states in the HTML and toggle them with the `hidden` attribute (include a CSS rule so `hidden` always wins over the page builder's styles).
+
+Play button and 5-second radio clip:
+- On the real card's artwork, add a round amber play button (inline SVG play icon, switching to a pause icon while playing) next to the label "side b · 5 sec preview".
+- Clicking it plays a 5-second original lofi clip generated live with the Web Audio API — nothing to download or host. The clip: jazzy chords Dm9 → G13 → Cmaj9 → Am7 (1.25s each) on a soft electric-piano tone (sine + a little triangle + a quiet octave), a tiny strum between notes, a slow "tape wobble" that bends the pitch a few cents, a round sine bass on each chord's root, a lazy swung drum beat at 72 BPM (soft kick, noise snare, quiet hi-hats with late off-beats), steady quiet tape hiss and random soft vinyl pops.
+- Run everything through a warm low-pass filter and a limiter so it never clips; fade in quickly and fade out over the last second.
+- A thin amber progress line fills along the bottom of the artwork over the 5 seconds. Clicking again stops it early. When it ends, the button resets.
+- Only create the audio when the button is clicked (browsers block sound before a click). Give the button an `aria-label` that changes between "Play 5-second lofistack radio clip" and "Stop clip".
+
+Accessibility: the card sets `aria-busy` while loading and `aria-live="polite"` so screen readers hear the change. Turn animations off if the visitor has "reduce motion" on.
+
+Safety with the page builder: prefix every class with `ls-`, wrap the script in a function, and guard against wiring it twice.
+
+Style: warm dark lofi palette — deep brown card (#282219), cream text (#ece4d6), muted tan secondary text (#a2977f), amber accent (#e0985f). The real card is a pretend "lofi radio" playlist: "rainy window study mix", "1 hr 12 min · tape hiss included", station "lofistack radio".</pre>
+      </section>
+    </div>
+  </main>
+  <footer class="ls-foot">
+    <div class="ls-wrap ls-foot-in">
+      <div class="ls-who">
+        <span class="ls-who-name">Md Asif-Ud-Doula</span>
+        <span class="ls-who-post">Senior Automation Engineer L4</span>
+      </div>
+      <ul class="ls-teams" aria-label="Teams">
+        <li>Service Team Lead</li>
+        <li>Operation Team</li>
+        <li>Client Acquisition Team</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll(".ls-copy[data-copy]").forEach(function (btn) {
+      if (btn.getAttribute("data-ls-ready")) return;
+      btn.setAttribute("data-ls-ready", "1");
+      btn.addEventListener("click", function () {
+        var text = document.getElementById(btn.getAttribute("data-copy")).textContent;
+        function done() { btn.textContent = "copied"; setTimeout(function () { btn.textContent = "copy"; }, 1500); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () {});
+        }
+      });
+    });
+  })();
+</script>
