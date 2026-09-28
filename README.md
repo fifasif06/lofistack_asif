@@ -4,14 +4,14 @@ A 90-day component gallery (Sep 22 – Dec 20, 2026): **30 UI components and 13 
 
 Every component has its own live page with a working demo, its full code, and the final prompt that produced it.
 
-**Live site:** _added after the first Vercel deploy_
+**Live site:** https://lofistack-asif.vercel.app
 
 ## Components
 
 | Week | Component | Type | Live page | Code | Prompt |
 |---|---|---|---|---|---|
-| 1 | Magnetic Hover Button | button | `/components/magnetic-button` | [component.html](components/magnetic-button/component.html) | [prompt.md](components/magnetic-button/prompt.md) |
-| 1 | Skeleton Screen Loader | loader | `/components/skeleton-loader` | [component.html](components/skeleton-loader/component.html) | [prompt.md](components/skeleton-loader/prompt.md) |
+| 1 | Magnetic Hover Button | button | [open](https://lofistack-asif.vercel.app/components/magnetic-button) | [component.html](components/magnetic-button/component.html) | [prompt.md](components/magnetic-button/prompt.md) |
+| 1 | Skeleton Screen Loader | loader | [open](https://lofistack-asif.vercel.app/components/skeleton-loader) | [component.html](components/skeleton-loader/component.html) | [prompt.md](components/skeleton-loader/prompt.md) |
 
 ## Agent logs
 
