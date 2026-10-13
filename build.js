@@ -1,7 +1,8 @@
 // Builds the whole LofiStack site into dist/ — Vercel runs this on every push to main.
 // Run locally:  npm install  then  npm run build   (then `npm run preview` to look at it)
+// `npm run build` type-checks everything first (tsc --noEmit), then runs this script.
 //
-// 1. Vite builds the React app (src/ + components/) into dist/.
+// 1. Vite builds the React + TypeScript + Tailwind app (src/ + components/) into dist/.
 // 2. Then this script writes one small HTML file per page — dist/components/<slug>.html —
 //    with that component's own title and description, so shared links show a proper preview.
 //    React takes over once the page loads. Vercel's clean URLs serve it at /components/<slug>.
@@ -15,12 +16,11 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const reg = JSON.parse(fs.readFileSync(path.join(root, "registry.json"), "utf8"));
 const out = path.join(root, "dist");
 
-// every component folder must have its code + prompt, or the build stops
+// every component folder must have its code, demo and prompt, or the build stops
 for (const c of reg.components) {
-  const dir = path.join(root, "components", c.slug);
-  const hasCode = ["component.jsx", "component.html"].some((f) => fs.existsSync(path.join(dir, f)));
-  if (!hasCode) throw new Error(`components/${c.slug}/ needs component.jsx or component.html`);
-  if (!fs.existsSync(path.join(dir, "prompt.md"))) throw new Error(`components/${c.slug}/ needs prompt.md`);
+  for (const f of ["component.tsx", "demo.tsx", "prompt.md"]) {
+    if (!fs.existsSync(path.join(root, "components", c.slug, f))) throw new Error(`components/${c.slug}/ needs ${f}`);
+  }
 }
 
 await build({ root, logLevel: "warn" });

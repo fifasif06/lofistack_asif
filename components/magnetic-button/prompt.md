@@ -1,15 +1,10 @@
 # Final prompt — Magnetic Hover Button
 
-Build a magnetic hover button as one self-contained block of plain HTML, CSS and JavaScript (no frameworks, no libraries) that I can paste into a GoHighLevel custom code element.
+Build a MagneticButton in React + TypeScript (strict) + Tailwind CSS v4. No libraries.
 
-Behavior:
-- Wrap the button in an invisible "pull zone" that reaches 60px past its edges. While the mouse is inside that zone, the button slides toward the cursor by about 35% of the cursor's distance from the button's center.
-- Measure the distance from the button's edges, not its center, so a wide button feels as magnetic as a square one.
-- The label inside moves a little further than the button itself, for a subtle depth effect.
-- When the mouse leaves, the button bounces back to rest: use a fast ease-out (~120ms) while it's being pulled and a slower overshoot curve (~480ms) for the bounce back.
-- Mouse only: ignore touch and pen, so taps on phones act like a normal button.
-- Turn the effect off entirely if the visitor has "reduce motion" switched on.
-- Use a real `<button>` with a visible focus outline for keyboard users.
-- Prefix every class with `ls-`, wrap the script in a function, and guard against wiring the same button twice, so it can't clash with the page builder's own styles or scripts.
-
-Style: pill shape, warm amber background (#e0985f), dark brown text (#16130f), medium-weight label that says "Hover me".
+- An invisible "pull zone" reaches `radius` px (default 60) past the button's edges. While a mouse is inside it, the button slides toward the cursor by `pull` (0.35) of the cursor's distance from its centre, measured from the button's edges so wide buttons feel as magnetic as round ones. The label travels a little further (`labelPull` 0.2) for depth.
+- Fast ease-out (~120ms) while pulled; on leave it bounces back with an overshoot curve (~480ms). Write the translate straight to the elements, so mouse moves never re-render React.
+- Mouse only: touch and pen get a normal button. No magnet with "reduce motion", when disabled, or while loading.
+- Props: extends the native button attributes; children, pull, labelPull, radius, loading (spinner, aria-busy, blocks clicks), variant "solid" | "outline".
+- States: hover (lighter amber), pressed (scale 0.96), focus-visible (2px amber outline, 4px offset), disabled (faded, not-allowed cursor), loading.
+- Look: pill shape, amber #e0985f with dark #16130f text and a soft amber glow; outline variant = amber border and text on dark. Medium-weight Geist label.

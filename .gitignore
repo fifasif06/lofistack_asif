@@ -4,3 +4,4 @@ public/
 .vercel/
 .DS_Store
 *.log
+coverage/
