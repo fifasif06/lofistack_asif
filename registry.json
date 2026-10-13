@@ -1,5 +1,6 @@
 {
   "repo": "https://github.com/fifasif06/lofistack_asif",
+  "site": "https://lofistack-asif-gallery.vercel.app",
   "owner": {
     "name": "Md Asif-Ud-Doula",
     "post": "Senior Automation Engineer L4",
@@ -15,21 +16,24 @@
       "slug": "magnetic-button",
       "type": "button",
       "week": 1,
-      "description": "A button that leans toward your cursor as it approaches and springs back to rest when you leave."
+      "description": "A button that leans toward your cursor as it comes near and springs back to rest when you leave — with outline, loading and disabled states.",
+      "hint": "Move your mouse near a button. Press Send to see the loading state."
     },
     {
       "name": "Skeleton Screen Loader",
       "slug": "skeleton-loader",
       "type": "loader",
       "week": 1,
-      "description": "A shimmering placeholder card that mirrors the real layout while content loads, then fades to it — with a 5-second lofi radio clip on play."
+      "description": "A shimmering placeholder that mirrors the real card while it loads, then fades to it — press play for a 5-second lofi clip made live in your browser.",
+      "hint": "Sound on: press play for a 5-second lofi clip. \"replay loading\" shows the skeleton again."
     },
     {
       "name": "3D Tilt Profile Card",
       "slug": "tilt-profile-card",
       "type": "card",
       "week": 2,
-      "description": "A profile card that tilts in 3D toward your cursor (or finger), with a soft glare and layers that float at different depths — then springs back flat."
+      "description": "A profile card that tilts in 3D toward your cursor (or finger), with a soft glare and layers that float at different depths — then springs back flat.",
+      "hint": "Move your cursor over the card, or drag a finger across it on a phone."
     },
     {
       "name": "Floating-Label Contact Form",
@@ -37,7 +41,7 @@
       "type": "form",
       "week": 2,
       "description": "A contact form whose labels sit inside each field and float up as you type, with friendly checks when you leave a field and a sending → sent state.",
-      "hint": "Try leaving a field empty, or typing a broken email, then click away."
+      "hint": "Type a broken email (or clear a field you typed in), then click away — or press Send with fields empty."
     },
     {
       "name": "OTP Input",
@@ -46,6 +50,76 @@
       "week": 2,
       "description": "Six boxes for a one-time code: type, paste or let your phone autofill it. Jumps box to box, checks the code the moment it's complete, and has a resend timer.",
       "hint": "Demo code: 246810 — any other code shows the error."
+    },
+    {
+      "name": "Shrink-on-Scroll Navbar",
+      "slug": "shrink-navbar",
+      "type": "navbar",
+      "week": 3,
+      "description": "A sticky top bar that is tall and see-through at the top, then eases into a compact blurred bar with an amber scroll-progress line. On narrow screens the links fold into a menu.",
+      "hint": "Scroll inside the box to watch the bar shrink. On a phone, open the menu and try Escape.",
+      "stage": "wide"
+    },
+    {
+      "name": "Bento Feature Grid",
+      "slug": "bento-feature-grid",
+      "type": "section",
+      "week": 3,
+      "description": "A feature section with a bento grid of mixed-size tiles that reflows to the space it gets. Tiles lift and catch a soft amber spotlight under your cursor, and fade up as they scroll in.",
+      "hint": "Move your cursor over a tile to see the spotlight; Tab reaches the three linked tiles.",
+      "stage": "wide"
+    },
+    {
+      "name": "Sortable Data Table",
+      "slug": "sortable-table",
+      "type": "table",
+      "week": 4,
+      "description": "A typed data table you sort by clicking column headers: ascending, descending, then back to the original order. Has loading and empty states and scrolls sideways on phones.",
+      "hint": "Click a header to sort, again to flip it, a third time to go back. Try Loading and Empty too.",
+      "stage": "wide"
+    },
+    {
+      "name": "Animated Bar Chart",
+      "slug": "animated-bar-chart",
+      "type": "chart",
+      "week": 4,
+      "description": "A bar chart whose bars grow up from zero when it scrolls into view and glide to new heights when the data changes, with tooltips, arrow-key navigation and a hidden table for screen readers.",
+      "hint": "Switch weeks to watch the bars glide. Hover a bar, or Tab in and use the arrow keys.",
+      "stage": "wide"
+    },
+    {
+      "name": "Spring Bottom Sheet",
+      "slug": "spring-bottom-sheet",
+      "type": "modal",
+      "week": 4,
+      "description": "A modal sheet that springs up with real physics, snaps to half or near-full height and follows your drag. Flick it down to dismiss; Escape, backdrop and keyboard all work too.",
+      "hint": "Drag the handle or header between heights, or flick it down to close. Keyboard: Enter on the handle resizes, Esc closes."
+    }
+  ],
+  "logs": [
+    {
+      "week": 1,
+      "kind": "Code generation",
+      "file": "agent-logs/week-01-code-generation.md",
+      "summary": "Built the gallery site and both Week 1 components with an agent, then tested them in a real browser."
+    },
+    {
+      "week": 2,
+      "kind": "Data transformation",
+      "file": "agent-logs/week-02-data-transformation.md",
+      "summary": "Turned this repo's raw commit history into a clean CSV, then into a report with checked totals."
+    },
+    {
+      "week": 3,
+      "kind": "Design to code",
+      "file": "agent-logs/week-03-design-to-code.md",
+      "summary": "Drew the bento section as an exact design first, had the agent build it from the design, then checked every tile against the design by measuring and overlaying screenshots."
+    },
+    {
+      "week": 4,
+      "kind": "Test generation",
+      "file": "agent-logs/week-04-test-generation.md",
+      "summary": "Had the agent write 227 tests for all 10 components from their prompts (the spec), sort every failure into test mistake vs real bug, fix the real one and prove the tests catch broken code."
     }
   ]
 }

@@ -1,0 +1,45 @@
+
+ RUN  v5.0.4 /home/claude/site
+      Coverage enabled with v8
+
+
+ Test Files  10 passed (10)
+      Tests  227 passed (227)
+   Start at  00:34:59
+   Duration  25.58s (tests 60%, environment 29%, setup 6%, worker 2%, import 2%, transform 1%)
+
+Environment  jsdom was created 10 times · 6.78s total, 29% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   97.61 |    93.34 |   96.07 |    99.4 |                   
+ ...ated-bar-chart |   95.52 |     92.9 |   91.89 |     100 |                   
+  component.tsx    |   95.52 |     92.9 |   91.89 |     100 | ...84,323,332,336 
+ ...o-feature-grid |     100 |    97.61 |     100 |     100 |                   
+  component.tsx    |     100 |    97.61 |     100 |     100 | 174               
+ ...ing-label-form |   98.52 |    93.69 |   97.22 |     100 |                   
+  component.tsx    |   98.52 |    93.69 |   97.22 |     100 | ...84,209,244,350 
+ magnetic-button   |   97.22 |    93.47 |     100 |     100 |                   
+  component.tsx    |   97.22 |    93.47 |     100 |     100 | 51,66-67          
+ otp-input         |   98.63 |    93.54 |     100 |     100 |                   
+  component.tsx    |   98.63 |    93.54 |     100 |     100 | 118,189,201       
+ skeleton-loader   |   98.64 |    91.37 |    92.3 |     100 |                   
+  component.tsx    |   98.64 |    91.37 |    92.3 |     100 | ...06,130,232,385 
+ sortable-table    |   95.94 |    96.63 |   95.83 |   98.43 |                   
+  component.tsx    |   95.94 |    96.63 |   95.83 |   98.43 | 185               
+ ...g-bottom-sheet |   96.21 |    87.05 |   92.85 |   97.82 |                   
+  component.tsx    |   96.21 |    87.05 |   92.85 |   97.82 | 264-267,433-434   
+ tilt-profile-card |   97.91 |    96.22 |     100 |     100 |                   
+  component.tsx    |   97.91 |    96.22 |     100 |     100 | 72,103            
+-------------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 97.61% ( 1147/1175 )
+Branches     : 93.34% ( 856/917 )
+Functions    : 96.07% ( 245/255 )
+Lines        : 99.4% ( 995/1001 )
+================================================================================

@@ -1,0 +1,31 @@
+/* Site styles: Tailwind CSS v4 + the LofiStack colour tokens. Components are styled with
+   Tailwind classes only (plus a tiny <style> for keyframes where a component needs one). */
+@import "tailwindcss";
+@source "../components";
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --color-ls-bg: #16130f;
+  --color-ls-surface: #1f1b16;
+  --color-ls-raised: #282219;
+  --color-ls-line: #37302a;
+  --color-ls-fg: #ece4d6;
+  --color-ls-muted: #a2977f;
+  --color-ls-amber: #e0985f;
+}
+
+@layer base {
+  html { background: var(--color-ls-bg); color-scheme: dark; }
+  body {
+    margin: 0;
+    background: var(--color-ls-bg);
+    color: var(--color-ls-fg);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--color-ls-amber); color: var(--color-ls-bg); }
+}
